@@ -3,10 +3,13 @@ from threading import Thread
 import cv2
 
 class WebcamVideoStream:
-	def __init__(self, src=0, name="WebcamVideoStream"):
+	def __init__(self, src=0, url="http://192.168.15.5:8080", name="WebcamVideoStream"):
 		# initialize the video camera stream and read the first frame
 		# from the stream
-		self.stream = cv2.VideoCapture(src)
+		if src==0:
+			self.stream = cv2.VideoCapture(src)
+		elif src==1:
+    			self.stream = cv2.VideoCapture(url+"/video")
 		(self.grabbed, self.frame) = self.stream.read()
 
 		# initialize the thread name
